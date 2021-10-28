@@ -11,7 +11,7 @@ const {
 } = require('./webpack/config');
 
 const webpackConfig = {
-    entry: ['./www/css/root.scss', './www/root.tsx'],
+    entry: ['./src/www/css/root.scss', './src/www/root.tsx'],
     output: {
         pathinfo: false,
         path: path.join(cwd, pathToDist),

@@ -2,7 +2,7 @@
 import {useEffect} from 'react';
 import {render, screen} from '@testing-library/react';
 
-import {NavigationProvider} from '../../../test-unit/util/navigation-provider';
+import {NavigationProvider} from '../../../../test-unit/util/navigation-provider';
 
 import {useUrl} from './url-hook';
 import {NavigationLink} from './navigation-link';

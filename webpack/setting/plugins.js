@@ -25,7 +25,7 @@ const definePluginParameters = {
 
 const staticFilesSiteList = [
     {
-        from: './www/favicon.ico',
+        from: './src/www/favicon.ico',
         to: filePathPrefix + 'favicon.ico',
     },
 ];
@@ -52,7 +52,7 @@ const pluginList = [
         },
         hash: true,
         filename: filePathPrefix + 'index.html',
-        template: './www/index.html',
+        template: './src/www/index.html',
     }),
     new CopyWebpackPlugin({
         patterns: staticFilesSiteList,

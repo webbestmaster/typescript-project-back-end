@@ -3,7 +3,7 @@ import {useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import {render, screen} from '@testing-library/react';
 
-import {NavigationProvider} from '../../../test-unit/util/navigation-provider';
+import {NavigationProvider} from '../../../../test-unit/util/navigation-provider';
 
 import {useUrl} from './url-hook';
 import {QueryValueType, UseUrlHookOptionsType} from './url-hook-type';
