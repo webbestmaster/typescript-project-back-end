@@ -1,0 +1,114 @@
+/* stylelint-disable keyframes-name-pattern */
+
+@use 'sass:math';
+
+$color-border: #444;
+$light-gray: #f0f0f0;
+$z-index-wrapper: 5;
+
+@keyframes loading-spinner {
+    0% {
+        transform: rotateZ(0);
+    }
+
+    100% {
+        transform: rotateZ(360deg);
+    }
+}
+
+%spinner-animation {
+    animation-direction: normal;
+    animation-duration: 0.75s;
+    animation-fill-mode: none;
+    animation-iteration-count: infinite;
+    animation-name: loading-spinner;
+    animation-play-state: running;
+    animation-timing-function: linear;
+}
+
+@keyframes show-spinner-animation {
+    0% {
+        opacity: 0%;
+    }
+
+    100% {
+        opacity: 100%;
+    }
+}
+
+%show-spinner-animation {
+    animation-direction: normal;
+    animation-duration: 0.5s;
+    animation-fill-mode: none;
+    animation-iteration-count: 1;
+    animation-name: show-spinner-animation;
+    animation-play-state: running;
+    animation-timing-function: linear;
+}
+
+.spinner_wrapper {
+    align-items: center;
+    background-color: rgb(255 255 255 / 50%);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    overflow: hidden;
+    padding: 12px;
+    position: static;
+    top: 0;
+    width: 100%;
+    z-index: $z-index-wrapper;
+}
+
+.spinner_image {
+    @extend %spinner-animation;
+
+    border-color: $light-gray;
+    border-radius: 100%;
+    border-style: solid;
+    border-top-color: $color-border;
+    border-width: 5px;
+    box-sizing: border-box;
+    display: block;
+}
+
+$ascii-spinner-frame-list: '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏';
+
+@mixin spinner-animation-generator($animation-name, $frame-list) {
+    $frame-list-length: length($frame-list);
+
+    @keyframes #{$animation-name} {
+        @each $current-frame in $frame-list {
+            $frame-index: index($frame-list, $current-frame) - 1;
+            #{math.div($frame-index, $frame-list-length) * 100}% {
+                content: $current-frame;
+            }
+        }
+
+        100% {
+            content: nth($frame-list, 1);
+        }
+    }
+}
+
+@include spinner-animation-generator(ascii-spinner-animation, $ascii-spinner-frame-list);
+
+// inspiration is here - https://jsfiddle.net/sindresorhus/2eLtsbey/embedded/result/
+.ascii_spinner {
+    display: inline;
+
+    &:before {
+        animation-direction: normal;
+        animation-duration: 1s;
+        animation-fill-mode: none;
+        animation-iteration-count: infinite;
+        animation-name: ascii-spinner-animation;
+        animation-play-state: running;
+        animation-timing-function: linear;
+        content: nth($ascii-spinner-frame-list, 1);
+        vertical-align: middle;
+    }
+}
